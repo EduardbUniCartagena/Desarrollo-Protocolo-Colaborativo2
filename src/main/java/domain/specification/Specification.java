@@ -1,4 +1,4 @@
-package main.java.domain.especication;
+package main.java.domain.specification;
 
 public interface Specification<T> {
     boolean isSatisfiedBy(T candidate);

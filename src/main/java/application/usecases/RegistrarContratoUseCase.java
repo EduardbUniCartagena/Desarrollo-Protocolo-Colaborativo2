@@ -1,4 +1,7 @@
 package main.java.application.usecases;
 
-public class RegistrarContratoUseCase {
+import main.java.application.dto.ContratoDTO;
+
+public interface RegistrarContratoUseCase {
+    void registrar(ContratoDTO contratoDTO);
 }

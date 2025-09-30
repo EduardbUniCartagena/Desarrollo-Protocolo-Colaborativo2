@@ -48,4 +48,20 @@ public class Contrato {
         }
         return new Contrato(numeroContrato, patrocinador, duracion, importeTotal);
     }
+
+    public String getNumeroContrato() {
+        return numeroContrato;
+    }
+
+    public Patrocinador getPatrocinador() {
+        return patrocinador;
+    }
+
+    public Duracion getDuracion() {
+        return duracion;
+    }
+
+    public Importe getImporteTotal() {
+        return importeTotal;
+    }
 }
