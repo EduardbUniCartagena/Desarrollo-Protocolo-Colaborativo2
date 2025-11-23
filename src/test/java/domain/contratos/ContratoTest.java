@@ -15,7 +15,7 @@ class ContratoTest {
 
     @Test
     void noDebePermitirAsignarPublicidadSiContratoVencido() throws Exception {
-        Patrocinador patrocinador = new Patrocinador("P01", "CocaCola");
+        Patrocinador patrocinador = new Patrocinador("P01");
         Duracion duracion = new Duracion(1); // 1 mes
         Importe importe = new Importe(1000.0);
         Contrato contrato = new Contrato("C001", patrocinador, duracion, importe);
@@ -34,7 +34,7 @@ class ContratoTest {
 
     @Test
     void debePermitirAsignarPublicidadSiContratoActivo() {
-        Patrocinador patrocinador = new Patrocinador("P02", "Pepsi");
+        Patrocinador patrocinador = new Patrocinador("P02");
         Duracion duracion = new Duracion(6); // 6 meses
         Importe importe = new Importe(2000.0);
         Contrato contrato = new Contrato("C002", patrocinador, duracion, importe);

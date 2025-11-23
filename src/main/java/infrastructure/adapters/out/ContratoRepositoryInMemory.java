@@ -1,23 +1,38 @@
 package main.java.infrastructure.adapters.out;
 
-
-
 import main.java.application.usecases.ContratoRepository;
 import main.java.domain.contratos.Contrato;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ContratoRepositoryInMemory implements ContratoRepository {
-    private final Map<String, Contrato> storage = new HashMap<>();
+
+    // Mapa interno para simular la base de datos
+    private final Map<String, Contrato> contratos = new HashMap<>();
 
     @Override
     public void guardar(Contrato contrato) {
-        storage.put(contrato.getNumeroContrato(), contrato);
+        contratos.put(contrato.getNumeroContrato(), contrato);
     }
 
     @Override
     public Contrato buscarPorNumero(String numeroContrato) {
-        return storage.get(numeroContrato);
+        return contratos.get(numeroContrato);
+    }
+
+    @Override
+    public List<Contrato> listarTodos() {
+        return new ArrayList<>(contratos.values());
+    }
+
+    @Override
+    public void actualizar(Contrato contrato) {
+        // Reemplaza el contrato existente con el contrato actualizado
+        contratos.put(contrato.getNumeroContrato(), contrato);
+    }
+
+    @Override
+    public void eliminar(String numeroContrato) {
+        contratos.remove(numeroContrato);
     }
 }
