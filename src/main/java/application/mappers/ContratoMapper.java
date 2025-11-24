@@ -1,8 +1,8 @@
 package main.java.application.mappers;
 
-import main.java.application.dto.ContratoCrearDTO;
-import main.java.application.dto.ContratoActualizarDTO;
-import main.java.application.dto.ContratoRespuestaDTO;
+import main.java.application.dto.contratos.ContratoCrearDTO;
+import main.java.application.dto.contratos.ContratoActualizarDTO;
+import main.java.application.dto.contratos.ContratoRespuestaDTO;
 
 import main.java.domain.contratos.Contrato;
 import main.java.domain.contratos.Patrocinador;

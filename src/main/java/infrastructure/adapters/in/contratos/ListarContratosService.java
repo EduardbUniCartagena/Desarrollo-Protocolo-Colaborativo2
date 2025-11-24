@@ -1,6 +1,6 @@
-package main.java.infrastructure.adapters.in;
+package main.java.infrastructure.adapters.in.contratos;
 
-import main.java.application.usecases.ListarContratosUseCase;
+import main.java.application.usecases.contratos.ListarContratosUseCase;
 import main.java.domain.contratos.Contrato;
 
 import java.util.List;

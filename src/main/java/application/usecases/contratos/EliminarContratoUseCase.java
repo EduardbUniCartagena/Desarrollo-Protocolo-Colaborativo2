@@ -1,4 +1,4 @@
-package main.java.application.usecases;
+package main.java.application.usecases.contratos;
 
 import main.java.domain.excepciones.DomainException;
 

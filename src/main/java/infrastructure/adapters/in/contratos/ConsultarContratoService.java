@@ -1,6 +1,6 @@
-package main.java.infrastructure.adapters.in;
+package main.java.infrastructure.adapters.in.contratos;
 
-import main.java.application.usecases.ConsultarContratoUseCase;
+import main.java.application.usecases.contratos.ConsultarContratoUseCase;
 import main.java.domain.contratos.Contrato;
 
 public class ConsultarContratoService {

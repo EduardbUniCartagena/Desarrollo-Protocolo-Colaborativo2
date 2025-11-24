@@ -1,6 +1,6 @@
 package main.java.infrastructure.adapters.out;
 
-import main.java.application.usecases.ContratoRepository;
+import main.java.application.usecases.contratos.ContratoRepository;
 import main.java.domain.contratos.Contrato;
 
 import java.util.*;

@@ -1,6 +1,6 @@
-package main.java.application.usecases;
+package main.java.application.usecases.contratos;
 
-import main.java.application.dto.ContratoActualizarDTO;
+import main.java.application.dto.contratos.ContratoActualizarDTO;
 import main.java.application.mappers.ContratoMapper;
 import main.java.domain.contratos.Contrato;
 import main.java.domain.excepciones.DomainException;

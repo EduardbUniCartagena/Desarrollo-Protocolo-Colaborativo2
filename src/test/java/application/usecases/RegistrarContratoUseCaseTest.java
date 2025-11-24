@@ -1,9 +1,9 @@
 package test.java.application.usecases;
 
-import main.java.application.dto.ContratoCrearDTO;
-import main.java.application.usecases.ContratoRepository;
-import main.java.application.usecases.RegistrarContratoUseCase;
-import main.java.infrastructure.adapters.in.RegistrarContratoService;
+import main.java.application.dto.contratos.ContratoCrearDTO;
+import main.java.application.usecases.contratos.ContratoRepository;
+import main.java.application.usecases.contratos.RegistrarContratoUseCase;
+import main.java.infrastructure.adapters.in.contratos.RegistrarContratoService;
 import main.java.infrastructure.adapters.out.ContratoRepositoryInMemory;
 
 import org.junit.jupiter.api.Test;

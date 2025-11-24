@@ -1,7 +1,7 @@
-package main.java.infrastructure.adapters.in;
+package main.java.infrastructure.adapters.in.contratos;
 
-import main.java.application.dto.ContratoActualizarDTO;
-import main.java.application.usecases.ActualizarContratoUseCase;
+import main.java.application.dto.contratos.ContratoActualizarDTO;
+import main.java.application.usecases.contratos.ActualizarContratoUseCase;
 import main.java.domain.contratos.Contrato;
 
 public class ActualizarContratoService {

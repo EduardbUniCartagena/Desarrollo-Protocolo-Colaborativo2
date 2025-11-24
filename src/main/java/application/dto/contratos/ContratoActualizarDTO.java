@@ -1,4 +1,4 @@
-package main.java.application.dto;
+package main.java.application.dto.contratos;
 
 /**
  * DTO utilizado para actualizar un contrato existente.

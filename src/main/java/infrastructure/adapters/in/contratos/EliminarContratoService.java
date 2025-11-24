@@ -1,6 +1,6 @@
-package main.java.infrastructure.adapters.in;
+package main.java.infrastructure.adapters.in.contratos;
 
-import main.java.application.usecases.EliminarContratoUseCase;
+import main.java.application.usecases.contratos.EliminarContratoUseCase;
 
 public class EliminarContratoService {
 

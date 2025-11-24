@@ -1,8 +1,8 @@
-package main.java.infrastructure.adapters.in;
+package main.java.infrastructure.adapters.in.contratos;
 
-import main.java.application.dto.ContratoCrearDTO;
-import main.java.application.usecases.RegistrarContratoUseCase;
-import main.java.application.usecases.ContratoRepository;
+import main.java.application.dto.contratos.ContratoCrearDTO;
+import main.java.application.usecases.contratos.RegistrarContratoUseCase;
+import main.java.application.usecases.contratos.ContratoRepository;
 import main.java.application.mappers.ContratoMapper;
 import main.java.domain.contratos.Contrato;
 

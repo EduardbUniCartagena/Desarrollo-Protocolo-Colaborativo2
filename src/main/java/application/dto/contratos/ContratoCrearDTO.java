@@ -1,4 +1,4 @@
-package main.java.application.dto;
+package main.java.application.dto.contratos;
 
 public class ContratoCrearDTO {
 
