@@ -1,4 +1,4 @@
-package main.java.infrastructure.adapters.out;
+package main.java.infrastructure.adapters.out.contratos;
 
 import main.java.application.usecases.contratos.ContratoRepository;
 import main.java.domain.contratos.Contrato;

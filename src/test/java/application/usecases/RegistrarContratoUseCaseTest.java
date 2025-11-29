@@ -4,7 +4,7 @@ import main.java.application.dto.contratos.ContratoCrearDTO;
 import main.java.application.usecases.contratos.ContratoRepository;
 import main.java.application.usecases.contratos.RegistrarContratoUseCase;
 import main.java.infrastructure.adapters.in.contratos.RegistrarContratoService;
-import main.java.infrastructure.adapters.out.ContratoRepositoryInMemory;
+import main.java.infrastructure.adapters.out.contratos.ContratoRepositoryInMemory;
 
 import org.junit.jupiter.api.Test;
 
