@@ -1,112 +1,50 @@
-# README Técnico – Protocolo Colaborativo U2
+# README Técnico – Protocolo Colaborativo U2 (Versión Final)
 
-Este documento describe la organización de carpetas y componentes de la aplicación desarrollada para el CEA de procesos publicitarios en radio. La implementación sigue los principios de **arquitectura hexagonal**, separando dominio, aplicación e infraestructura.  
+Este documento describe la arquitectura y organización del **Sistema de Gestión de Procesos Publicitarios en Radio**. La implementación sigue estrictamente los principios de **Arquitectura Hexagonal** (Puertos y Adaptadores), garantizando la separación de preocupaciones entre la lógica de negocio, la interfaz de usuario y la persistencia de datos.
 
-El código está escrito en **Java estándar**, sin dependencias de frameworks, garantizando la independencia del dominio frente a la infraestructura y facilitando la mantenibilidad.
+El proyecto ha evolucionado desde una versión en memoria hacia una aplicación de escritorio completa con persistencia en **MySQL** e interfaz gráfica **Java Swing**.
 
 ---
 
 ## 📂 Estructura del proyecto
 
-```
+A continuación se detalla la organización del código fuente en `src/main/java`:
+
+```text
 src
  ├── main
  │   └── java
- │       ├── application         -> Casos de uso, DTOs y mapeadores
+ │       ├── application             -> (Capa de Aplicación) Casos de uso, DTOs y Mappers
  │       │    ├── dto
- │       │    │   └── ContratoDTO.java
- │       │    ├── mappers
- │       │    │   └── ContratoMapper.java
- │       │    └── usecases
- │       │        ├── ContratoRepository.java
- │       │        └── RegistrarContratoUseCase.java
+ │       │    │   ├── contratos
+ │       │    │   └── emisoras
+ │       │    ├── mappers            -> Conversión entre DTOs y Entidades de Dominio
+ │       │    └── usecases           -> Orquestación de lógica (Puertos de entrada)
+ │       │        ├── contratos
+ │       │        ├── emisoras
+ │       │        └── reportes       -> Casos de uso para consultas complejas
  │       │
- │       ├── domain              -> Capa de dominio (reglas de negocio puras)
- │       │    ├── contratos      -> Entidades y agregados (Contrato, Patrocinador, Duracion, Importe)
- │       │    ├── emisoras       -> Entidades y VO relacionados (Emisora, FranjaHoraria, Programa)
- │       │    ├── eventos        -> Eventos de dominio (ContratoDePublicidadCreado, PublicidadAsignadaAPrograma)
- │       │    ├── excepciones    -> Excepciones específicas (ContratoVencidoException, DomainException)
- │       │    ├── servicios      -> Servicios de dominio y estrategias (Strategy, Domain Service)
- │       │    └── specification  -> Implementación del patrón Specification
+ │       ├── domain                  -> (Capa de Dominio) Reglas de negocio puras
+ │       │    ├── contratos          -> Agregados (Contrato, Patrocinador, Duracion)
+ │       │    ├── emisoras           -> Entidades (Emisora, Programa, FranjaHoraria)
+ │       │    ├── eventos            -> Eventos de dominio
+ │       │    ├── excepciones        -> Excepciones de negocio (ContratoVencidoException)
+ │       │    ├── servicios          -> Servicios de dominio (Cálculo de tarifas)
+ │       │    └── specification      -> Patrón Specification (Validación de reglas)
  │       │
- │       └── infrastructure      -> Adaptadores de entrada y salida
+ │       └── infrastructure          -> (Capa de Infraestructura) Adaptadores
  │            ├── adapters
- │            │   ├── in         -> Servicios de aplicación (RegistrarContratoService)
- │            │   └── out        -> Implementaciones de repositorios (ContratoRepositoryInMemory)
+ │            │   ├── database       -> Configuración de conexión JDBC (Singleton)
+ │            │   ├── in             -> Adaptadores de Entrada (UI y Servicios)
+ │            │   │   ├── contratos  -> Servicios intermedios
+ │            │   │   ├── emisoras
+ │            │   │   └── ui         -> Interfaz Gráfica (Swing: Paneles y Ventanas)
+ │            │   └── out            -> Adaptadores de Salida (Persistencia)
+ │            │       ├── contratos  -> Impl. MySQL e InMemory
+ │            │       ├── emisoras   -> Impl. MySQL e InMemory
+ │            │       └── reportes   -> Repositorios de consultas SQL avanzadas
  │
- └── test
+ └── test                            -> Pruebas Unitarias
      └── java
          ├── application
-         │    └── usecases
-         │         └── RegistrarContratoUseCaseTest.java
-         │
          └── domain
-              └── contratos
-                   ├── ContratoTest.java
-                   ├── DuracionTest.java
-                   └── ServicioCalculoPublicidadTest.java
-```
-
----
-
-## 🧩 Descripción por capas
-
-### Dominio
-- Define las **entidades** principales (`Contrato`, `Patrocinador`, `Emisora`), los **Value Objects** (`Duracion`, `Importe`, `FranjaHoraria`) y los **agregados**.  
-- Contiene las **reglas de negocio puras**.  
-- Incluye servicios como `PoliticaTarifaNormal` y `ServicioCalculoPublicidad`.  
-- Aplica patrones: Factory Method, Strategy, Specification y Domain Service.  
-
-### Aplicación
-- Implementa **casos de uso** (`RegistrarContratoUseCase`).  
-- Define **DTOs** y **mappers** (`ContratoDTO`, `ContratoMapper`) para comunicar el dominio con otras capas.  
-- Depende del dominio, pero nunca al revés.  
-
-### Infraestructura
-- Contiene **adaptadores** de entrada (ej. `RegistrarContratoService`) y salida (ej. `ContratoRepositoryInMemory`).  
-- Permite cambiar fácilmente tecnologías externas (repositorios, servicios, UI) sin modificar el dominio.  
-
-### Tests
-- Pruebas unitarias para entidades, servicios y casos de uso.  
-- Ejemplos:  
-  - `ContratoTest` asegura que los contratos se creen y validen correctamente.  
-  - `DuracionTest` valida las reglas de duración.  
-  - `ServicioCalculoPublicidadTest` prueba la lógica de cálculo de tarifas.  
-  - `RegistrarContratoUseCaseTest` comprueba el flujo completo del caso de uso.  
-
----
-
-## ✅ Independencia de frameworks
-El dominio está implementado en Java puro, sin dependencias de frameworks como Spring o JPA. Esto asegura que:
-- El dominio se pueda probar de manera aislada.  
-- La infraestructura se pueda sustituir sin modificar reglas de negocio.  
-- El sistema sea fácilmente extensible.  
-
----
-
-## 📌 Patrones de diseño aplicados
-- **Factory Method**: en `Contrato` para crear instancias válidas.  
-- **Strategy**: en políticas de cálculo de tarifas (`PoliticaCalculoTarifa`, `PoliticaTarifaNormal`, `PoliticaTarifaDescuento`).  
-- **Specification**: validación de franjas horarias con `FranjaHorariaDisponibleSpecification`.  
-- **Domain Service**: coordinación de reglas que involucran varias entidades (`ServicioCalculoPublicidad`).  
-
----
-
-## 🚀 Cómo ejecutar
-1. Compilar el proyecto desde la raíz:  
-   ```bash
-   javac -d out src/main/java/**/*.java
-   ```
-2. Ejecutar la clase principal:  
-   ```bash
-   java -cp out Main
-   ```
-3. Para correr los tests, utilizar un framework de testing compatible con JUnit (los tests están en `src/test/java`).  
-
----
-
-## 📖 Guía rápida
-- Revisa primero las entidades en `domain/contratos` y `domain/emisoras`.  
-- Luego analiza los Value Objects (`Duracion`, `Importe`, `FranjaHoraria`).  
-- Explora los servicios de dominio y especificaciones para entender las reglas transversales.  
-- Finalmente, consulta los casos de uso en `application/usecases` para ver cómo se orquesta el dominio desde la aplicación.  
